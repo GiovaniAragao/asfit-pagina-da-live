@@ -4,7 +4,9 @@ Página da live oficial de lançamento da Asfit (Agatha Sá), dia 11/11. Quem en
 link das mensagens: vê o que vai rolar na live, mexe numa prévia do app e responde a pesquisa do Grupo de Espera, que dá
 o Kit de Receitas de presente. Nas mensagens ela aparece como "a página onde eu explico tudo sobre o lançamento".
 
-Versão de referência no ar: https://live-asfit.pages.dev (Cloudflare Pages, provisória).
+No ar: https://asfit-live.netlify.app (Netlify, site id `0073bc3b-9719-45ac-82d5-94a0cea11bb7`, deploy manual:
+`npx -y netlify-cli deploy --prod --dir . --site 0073bc3b-9719-45ac-82d5-94a0cea11bb7`).
+Versão anterior de referência: https://live-asfit.pages.dev (Cloudflare Pages).
 
 - `index.html` — a página, com o CSS. A configuração fica no fim (`CONFIG_AQUECIMENTO`).
 - `js/pagina.js` — o que se mexe: a faixa com a contagem, a prévia do app (treino, dieta, creatina, legião e desafios)
@@ -40,7 +42,7 @@ novo, e a prévia do app trava.
 
 ## Domínio
 
-Trocar `https://live-asfit.pages.dev` pelo domínio final no `og:url` e no `og:image`, no topo do `index.html`. É o que
+O `og:url` e o `og:image`, no topo do `index.html`, apontam para `https://asfit-live.netlify.app`. Se entrar domínio próprio, trocar nos dois. É o que
 monta a prévia do link no WhatsApp. A página está com `noindex` (na meta `robots` e no `_headers`); se tiver que
 aparecer no Google, tirar dos dois lugares.
 
