@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Carimba a versão (?v=hash do conteúdo) nos scripts da página de aquecimento.
+"""Carimba a versão (?v=hash do conteúdo) nos scripts da página de aquecimento e da pesquisa.
 
 Rodar SEMPRE depois de mexer em qualquer arquivo de js/ e antes de publicar:
     /usr/bin/python3 fonte/versionar.py
@@ -33,4 +33,11 @@ for arq in ('js/gsap.min.js', 'js/ScrollTrigger.min.js', 'js/pagina.js'):
     html, n = re.subn(r'src="%s(?:\?v=[0-9a-f]+)?"' % re.escape(arq), 'src="%s?v=%s"' % (arq, carimbo(arq)), html)
     assert n == 1, 'não achei %s no index.html' % arq
 indice.write_text(html, encoding='utf-8')
-print('versões carimbadas:', ', '.join('%s=%s' % (a, carimbo(a)) for a in ('js/legiao.js', 'js/gsap.min.js', 'js/ScrollTrigger.min.js', 'js/pagina.js')))
+
+# 3) a página da pesquisa (pesquisa/index.html) chama ../js/pesquisa.js
+pesq = PASTA / 'pesquisa/index.html'
+ph = pesq.read_text(encoding='utf-8')
+ph, n = re.subn(r'src="\.\./js/pesquisa\.js(?:\?v=[0-9a-f]+)?"', 'src="../js/pesquisa.js?v=%s"' % carimbo('js/pesquisa.js'), ph)
+assert n == 1, 'não achei ../js/pesquisa.js no pesquisa/index.html'
+pesq.write_text(ph, encoding='utf-8')
+print('versões carimbadas:', ', '.join('%s=%s' % (a, carimbo(a)) for a in ('js/legiao.js', 'js/gsap.min.js', 'js/ScrollTrigger.min.js', 'js/pagina.js', 'js/pesquisa.js')))

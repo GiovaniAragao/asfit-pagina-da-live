@@ -100,7 +100,25 @@
   var fecharPopup = function () {};
   seguro('pesquisa', function () {
     var pesquisas = $$('.js-pesquisa');
-    pesquisas.forEach(function (a) { if (LINK_DA_PESQUISA) a.href = LINK_DA_PESQUISA; });
+    // A pesquisa é a página /pesquisa/ do próprio site: abre na MESMA aba e leva junto as utm_* desta visita
+    // (se o link for de outro site, mantém o comportamento antigo: aba nova e sem mexer no endereço)
+    var linkPesquisa = LINK_DA_PESQUISA, mesmaAba = false;
+    try {
+      var alvo = new URL(LINK_DA_PESQUISA, location.href);
+      mesmaAba = alvo.origin === location.origin;
+      if (mesmaAba) {
+        var atual = new URLSearchParams(location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+          if (atual.get(k) && !alvo.searchParams.has(k)) alvo.searchParams.set(k, atual.get(k));
+        });
+        linkPesquisa = alvo.href;
+      }
+    } catch (e) {}
+    pesquisas.forEach(function (a) {
+      if (!LINK_DA_PESQUISA) return;
+      a.href = linkPesquisa;
+      if (mesmaAba) { a.removeAttribute('target'); a.removeAttribute('rel'); }
+    });
     pesquisas.forEach(function (a) {
       a.addEventListener('click', function (e) {
         if (!LINK_DA_PESQUISA) e.preventDefault();
