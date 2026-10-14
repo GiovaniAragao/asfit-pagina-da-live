@@ -74,7 +74,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-  /* scroll-padding: a faixa fixa nunca cobre o que recebe foco ou o destino do link "Ir para a pesquisa" */
+  /* scroll-padding: a faixa fixa nunca cobre o que recebe foco nem o destino dos links do topo */
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 56px; }
   body {
     margin: 0;
@@ -126,17 +126,6 @@
   .botao--creme { background: transparent; color: var(--creme); box-shadow: inset 0 0 0 1.5px rgba(247, 243, 232, .7); }
   .botao--creme:hover { background: rgba(247, 243, 232, .08); }
 
-  /* ===== Bloco de ação: a pesquisa do Grupo de Espera, que dá o Kit de Receitas de presente (12/10/2026: o lembrete saiu) ===== */
-  .acoes { display: grid; justify-items: center; gap: 12px; text-align: center; }
-  .acoes__chamada, .acoes__dica { font-size: 15.5px; font-weight: 400; line-height: 1.4; color: var(--marrom-apoio); }
-  .acoes__chamada { font-weight: 500; color: var(--marrom); }
-  .acoes__seta { width: 22px; height: 22px; fill: currentColor; color: var(--terracota); margin: -4px 0 -2px; }
-  .acoes__dica { margin-top: 10px; }
-  .acoes .botao { width: min(100%, 360px); }
-  @media (prefers-reduced-motion: no-preference) {
-    .acoes__seta { animation: aponta 2.4s var(--mola) infinite; }
-    @keyframes aponta { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(4px); } }
-  }
 
   /* ===== Faixa fixa com a contagem ===== */
   .faixa {
@@ -153,7 +142,7 @@
   .topo { display: flex; justify-content: center; padding: 14px var(--lateral) 4px; }
   .topo img { width: 134px; height: auto; }
 
-  /* ===== DOBRA 1 — Topo e pesquisa: a mesma foto e o mesmo selo da captação ===== */
+  /* ===== DOBRA 1 — Topo: para que serve a página, com a mesma foto e o mesmo selo da captação ===== */
   .hero { padding-bottom: 64px; }
   .hero__grade { display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; padding-top: 12px; }
   /* foto da Agatha no pôr do sol, com a logo da Asfit no céu (escolha do Giovani pra captação, 09/10) */
@@ -170,7 +159,11 @@
   .hero__texto { display: grid; justify-items: center; gap: 14px; text-align: center; }
   .hero h1 { font-size: clamp(28px, 7.4vw, 50px); color: var(--marrom); max-width: 15em; }
   .hero .sub { font-size: 16.5px; line-height: 1.5; color: var(--marrom-apoio); max-width: 30em; }
-  .hero .acoes { margin-top: 6px; width: 100%; }
+  .hero__oi { font-size: 17px; font-weight: 500; color: var(--vinho); }
+  .hero__lista { list-style: none; margin: 2px 0 0; padding: 0; width: min(100%, 32em); text-align: left; border-top: 1px solid var(--linha); }
+  .hero__lista a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 2px; border-bottom: 1px solid var(--linha); color: var(--marrom); font-size: 16.5px; font-weight: 500; line-height: 1.35; text-decoration: none; }
+  .hero__lista a:hover { color: var(--vinho); }
+  .hero__lista svg { flex: none; width: 18px; height: 18px; fill: currentColor; color: var(--terracota); }
 
   /* ===== Sequência "Essa live é pra você que…": a bagunça vira a Asfit (roteiro do prompt de apresentação de app) ===== */
   .caos { position: relative; background: var(--marrom-noite); color: var(--creme); overflow: hidden; }
@@ -258,10 +251,6 @@
   .tour__legenda p { font-size: 16px; line-height: 1.5; color: var(--creme-apoio); }
   .tour__legenda.troca { animation: legenda .45s var(--mola); }
   @keyframes legenda { from { opacity: 0; transform: translateY(8px); } }
-  .app .acoes { margin-top: 40px; }
-  .app .acoes__chamada { color: var(--creme); }
-  .app .acoes__dica { color: var(--creme-apoio); }
-  .app .acoes__seta { color: var(--amarelo); }
 
   /* --- o aparelho --- */
   .celular {
@@ -654,7 +643,6 @@
   .linha__item p { font-size: 17px; color: var(--marrom-apoio); max-width: 34em; }
   .alerta { display: flex; gap: 10px; align-items: flex-start; justify-self: start; max-width: 40em; padding: 14px 18px; border-radius: 16px; background: rgba(202, 104, 57, .1); color: var(--marrom); font-size: 16px; font-weight: 500; line-height: 1.45; }
   .alerta svg { width: 22px; height: 22px; flex: none; fill: var(--terracota); margin-top: 1px; }
-  .live .acoes { margin-top: 48px; }
 
   /* ===== DOBRA 4 — Bônus, no amarelo ===== */
   .bonus-sec { background: var(--amarelo); color: var(--marrom); padding: 76px 0 72px; text-align: center; }
@@ -683,8 +671,6 @@
   .bonus .bonus__descricao { margin: 2px 4px 0; max-width: none; font-size: 16px; line-height: 1.5; color: var(--marrom); }
   .bonus-sec .alerta { justify-self: center; background: rgba(135, 58, 74, .1); text-align: left; }
   .bonus-sec .alerta svg { fill: var(--vinho); }
-  .bonus-sec .acoes { margin-top: 18px; }
-  .bonus-sec .acoes__dica, .bonus-sec .acoes__chamada { color: var(--marrom); }
 
   /* ===== DOBRA 5 — A legião (fecha a página) ===== */
   .legiao { background: var(--vinho); color: var(--creme); padding: 30px 0 84px; overflow: hidden; }
@@ -697,9 +683,6 @@
   .citacao p { font-size: clamp(21px, 4.8vw, 30px); font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; color: var(--amarelo); }
   .citacao cite { font-style: normal; font-size: 15px; font-weight: 500; color: var(--creme-apoio); }
   .legiao h2 { font-size: clamp(26px, 5.8vw, 40px); color: var(--creme); max-width: 16em; margin-top: 18px; }
-  .legiao .acoes__chamada { color: var(--creme); }
-  .legiao .acoes__dica { color: var(--creme-apoio); }
-  .legiao .acoes__seta { color: var(--amarelo); }
   .assinatura { font-size: 18px; font-weight: 500; color: var(--amarelo); margin-top: 12px; }
 
   /* ===== Rodapé ===== */
@@ -708,20 +691,6 @@
   .pos-load .rodape__pattern { background-image: url(img/pattern.webp); }
   .rodape p { display: flex; justify-content: center; gap: 22px; padding: 18px var(--lateral) 26px; }
 
-  /* ===== Pop-up de saída ===== */
-  .popup { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; }
-  .popup__fundo { position: absolute; inset: 0; background: rgba(46, 28, 17, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-  .popup__caixa { position: relative; width: min(100%, 440px); max-height: calc(100vh - 40px); overflow: auto; overscroll-behavior: contain; display: grid; justify-items: center; gap: 14px; padding: 34px 22px 26px; border-radius: 28px; background: var(--creme); text-align: center; box-shadow: 0 40px 80px -40px rgba(20, 6, 10, .9); }
-  .popup.abrindo .popup__caixa { animation: popup .45s var(--mola); }
-  .popup.abrindo .popup__fundo { animation: fade .3s ease; }
-  @keyframes popup { from { opacity: 0; transform: translateY(18px) scale(.97); } }
-  @keyframes fade { from { opacity: 0; } }
-  .popup__fechar { position: absolute; right: 10px; top: 10px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: var(--marrom-apoio); }
-  .popup__fechar svg { width: 22px; height: 22px; fill: currentColor; }
-  .popup img { width: 120px; height: auto; }
-  .popup h2 { font-size: 25px; color: var(--marrom); }
-  .popup__data { font-size: 16px; font-weight: 500; color: var(--vinho); }
-  .popup .botao { padding-inline: 20px; }
 
   /* nada dentro do celular pode rolar sozinho (foco de teclado ou scrollIntoView mexeriam na tela do app) */
   @supports (overflow: clip) {
@@ -750,8 +719,7 @@
     .hero__texto { justify-items: start; text-align: left; gap: 18px; padding: 12px 0 40px; }
     .hero h1 { font-size: clamp(40px, 4vw, 54px); max-width: 13em; }
     .hero .sub { font-size: 19.5px; }
-    .hero .acoes { justify-items: start; text-align: left; }
-    .hero .acoes .botao { width: auto; min-width: 320px; }
+    .hero__lista a { font-size: 18px; padding-block: 15px; }
 
     .app { padding: 40px 0 112px; }
     .tour { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; margin-top: 52px; }
@@ -771,7 +739,6 @@
     .live { padding: 112px 0 104px; }
     .live__grade { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 72px; align-items: start; }
     .live__cabeca { position: sticky; top: 96px; }
-    .live .acoes { margin-top: 72px; }
 
     .bonus-sec { padding: 112px 0 104px; }
     .bonus { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1000px; gap: 18px; }
@@ -818,7 +785,7 @@
 <!-- Ícones: Phosphor (regular e fill), em sprite -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-house" viewBox="0 0 256 256"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"/></symbol><symbol id="i-barbell" viewBox="0 0 256 256"><path d="M248,120h-8V88a16,16,0,0,0-16-16H208V64a16,16,0,0,0-16-16H168a16,16,0,0,0-16,16v56H104V64A16,16,0,0,0,88,48H64A16,16,0,0,0,48,64v8H32A16,16,0,0,0,16,88v32H8a8,8,0,0,0,0,16h8v32a16,16,0,0,0,16,16H48v8a16,16,0,0,0,16,16H88a16,16,0,0,0,16-16V136h48v56a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16v-8h16a16,16,0,0,0,16-16V136h8a8,8,0,0,0,0-16ZM32,168V88H48v80Zm56,24H64V64H88V192Zm104,0H168V64h24V175.82c0,.06,0,.12,0,.18s0,.12,0,.18V192Zm32-24H208V88h16Z"/></symbol><symbol id="i-users-three" viewBox="0 0 256 256"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></symbol><symbol id="i-leaf" viewBox="0 0 256 256"><path d="M223.45,40.07a8,8,0,0,0-7.52-7.52C139.8,28.08,78.82,51,52.82,94a87.09,87.09,0,0,0-12.76,49c.57,15.92,5.21,32,13.79,47.85l-19.51,19.5a8,8,0,0,0,11.32,11.32l19.5-19.51C81,210.73,97.09,215.37,113,215.94q1.67.06,3.33.06A86.93,86.93,0,0,0,162,203.18C205,177.18,227.93,116.21,223.45,40.07ZM153.75,189.5c-22.75,13.78-49.68,14-76.71.77l88.63-88.62a8,8,0,0,0-11.32-11.32L65.73,179c-13.19-27-13-54,.77-76.71,22.09-36.47,74.6-56.44,141.31-54.06C210.2,114.89,190.22,167.41,153.75,189.5Z"/></symbol><symbol id="i-sneaker-move" viewBox="0 0 256 256"><path d="M231.16,166.63l-28.63-14.31A47.74,47.74,0,0,1,176,109.39V80a8,8,0,0,0-8-8,48.05,48.05,0,0,1-48-48,8,8,0,0,0-12.83-6.37L30.13,76l-.2.16a16,16,0,0,0-1.24,23.75L142.4,213.66a8,8,0,0,0,5.66,2.34H224a16,16,0,0,0,16-16V180.94A15.92,15.92,0,0,0,231.16,166.63ZM224,200H151.37L40,88.63l12.87-9.76,38.79,38.79A8,8,0,0,0,103,106.34L65.74,69.11l40-30.31A64.15,64.15,0,0,0,160,87.5v21.89a63.65,63.65,0,0,0,35.38,57.24L224,180.94ZM70.8,184H32a8,8,0,0,1,0-16H70.8a8,8,0,1,1,0,16Zm40,24a8,8,0,0,1-8,8H48a8,8,0,0,1,0-16h54.8A8,8,0,0,1,110.8,208Z"/></symbol><symbol id="i-x" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol><symbol id="i-dots-three" viewBox="0 0 256 256"><path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm56-12a12,12,0,1,0,12,12A12,12,0,0,0,196,116ZM60,116a12,12,0,1,0,12,12A12,12,0,0,0,60,116Z"/></symbol><symbol id="i-pause" viewBox="0 0 256 256"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></symbol><symbol id="i-arrow-left" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/></symbol><symbol id="i-arrow-right" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol><symbol id="i-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="i-caret-left" viewBox="0 0 256 256"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></symbol><symbol id="i-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="i-bell" viewBox="0 0 256 256"><path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"/></symbol><symbol id="i-magnifying-glass" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></symbol><symbol id="i-plus" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></symbol><symbol id="i-heart" viewBox="0 0 256 256"><path d="M178,40c-20.65,0-38.73,8.88-50,23.89C116.73,48.88,98.65,40,78,40a62.07,62.07,0,0,0-62,62c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,228.66,240,172,240,102A62.07,62.07,0,0,0,178,40ZM128,214.8C109.74,204.16,32,155.69,32,102A46.06,46.06,0,0,1,78,56c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,155.61,146.24,204.15,128,214.8Z"/></symbol><symbol id="i-chat-circle" viewBox="0 0 256 256"><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"/></symbol><symbol id="i-paper-plane-tilt" viewBox="0 0 256 256"><path d="M227.32,28.68a16,16,0,0,0-15.66-4.08l-.15,0L19.57,82.84a16,16,0,0,0-2.49,29.8L102,154l41.3,84.87A15.86,15.86,0,0,0,157.74,248q.69,0,1.38-.06a15.88,15.88,0,0,0,14-11.51l58.2-191.94c0-.05,0-.1,0-.15A16,16,0,0,0,227.32,28.68ZM157.83,231.85l-.05.14,0-.07-40.06-82.3,48-48a8,8,0,0,0-11.31-11.31l-48,48L24.08,98.25l-.07,0,.14,0L216,40Z"/></symbol><symbol id="i-camera" viewBox="0 0 256 256"><path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"/></symbol><symbol id="i-arrows-left-right" viewBox="0 0 256 256"><path d="M213.66,181.66l-32,32a8,8,0,0,1-11.32-11.32L188.69,184H48a8,8,0,0,1,0-16H188.69l-18.35-18.34a8,8,0,0,1,11.32-11.32l32,32A8,8,0,0,1,213.66,181.66Zm-139.32-64a8,8,0,0,0,11.32-11.32L67.31,88H208a8,8,0,0,0,0-16H67.31L85.66,53.66A8,8,0,0,0,74.34,42.34l-32,32a8,8,0,0,0,0,11.32Z"/></symbol><symbol id="i-lock-simple" viewBox="0 0 256 256"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Z"/></symbol><symbol id="i-microphone" viewBox="0 0 256 256"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V240a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"/></symbol><symbol id="i-microphone-slash" viewBox="0 0 256 256"><path d="M213.92,218.62l-160-176A8,8,0,0,0,42.08,53.38L80,95.09V128a48,48,0,0,0,69.11,43.12l11.1,12.2A63.41,63.41,0,0,1,128,192a64.07,64.07,0,0,1-64-64,8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V240a8,8,0,0,0,16,0V207.59a78.83,78.83,0,0,0,35.16-12.22l30.92,34a8,8,0,1,0,11.84-10.76ZM128,160a32,32,0,0,1-32-32V112.69l41.66,45.82A32,32,0,0,1,128,160Zm57.52-3.91A63.32,63.32,0,0,0,192,128a8,8,0,0,1,16,0,79.16,79.16,0,0,1-8.11,35.12,8,8,0,0,1-7.19,4.49,7.88,7.88,0,0,1-3.51-.82A8,8,0,0,1,185.52,156.09ZM84,44.87A48,48,0,0,1,176,64v64a49.19,49.19,0,0,1-.26,5,8,8,0,0,1-8,7.17,8.13,8.13,0,0,1-.84,0,8,8,0,0,1-7.12-8.79c.11-1.1.17-2.24.17-3.36V64A32,32,0,0,0,98.64,51.25,8,8,0,1,1,84,44.87Z"/></symbol><symbol id="i-video-camera" viewBox="0 0 256 256"><path d="M251.77,73a8,8,0,0,0-8.21.39L208,97.05V72a16,16,0,0,0-16-16H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V159l35.56,23.71A8,8,0,0,0,248,184a8,8,0,0,0,8-8V80A8,8,0,0,0,251.77,73ZM192,184H32V72H192V184Zm48-22.95-32-21.33V116.28L240,95Z"/></symbol><symbol id="i-video-camera-slash" viewBox="0 0 256 256"><path d="M251.77,73a8,8,0,0,0-8.21.39L208,97.05V72a16,16,0,0,0-16-16H113.06a8,8,0,0,0,0,16H192v87.63a8,8,0,0,0,16,0V159l35.56,23.71A8,8,0,0,0,248,184a8,8,0,0,0,8-8V80A8,8,0,0,0,251.77,73ZM240,161.05l-32-21.33V116.28L240,95ZM53.92,34.62A8,8,0,1,0,42.08,45.38L51.73,56H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H182.64l19.44,21.38a8,8,0,1,0,11.84-10.76ZM32,184V72H66.28L168.1,184Z"/></symbol><symbol id="i-phone-x" viewBox="0 0 256 256"><path d="M146.34,98.34,164.69,80,146.34,61.66a8,8,0,0,1,11.32-11.32L176,68.69l18.34-18.35a8,8,0,0,1,11.32,11.32L187.32,80l18.34,18.34a8,8,0,0,1-11.32,11.32L176,91.31l-18.34,18.35a8,8,0,0,1-11.32-11.32Zm77.54,84.74A56.26,56.26,0,0,1,168,232C88.6,232,24,167.4,24,88A56.26,56.26,0,0,1,72.92,32.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,109.39,104c-.18.27-.37.52-.57.77L88,129.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,223.88,183.08Zm-15.88-2s-.07,0-.11,0h0l-47-21.05-24.35,20.71a8.44,8.44,0,0,1-.74.56,16,16,0,0,1-15.75,1.14c-18.73-9.05-37.4-27.58-46.46-46.11a16,16,0,0,1,1-15.7,6.13,6.13,0,0,1,.57-.77L96,95.15l-21-47a.61.61,0,0,1,0-.12A40.2,40.2,0,0,0,40,88,128.14,128.14,0,0,0,168,216,40.21,40.21,0,0,0,208,181.07Z"/></symbol><symbol id="i-drop" viewBox="0 0 256 256"><path d="M174,47.75a254.19,254.19,0,0,0-41.45-38.3,8,8,0,0,0-9.18,0A254.19,254.19,0,0,0,82,47.75C54.51,79.32,40,112.6,40,144a88,88,0,0,0,176,0C216,112.6,201.49,79.32,174,47.75ZM128,216a72.08,72.08,0,0,1-72-72c0-57.23,55.47-105,72-118,16.53,13,72,60.75,72,118A72.08,72.08,0,0,1,128,216Zm55.89-62.66a57.6,57.6,0,0,1-46.56,46.55A8.75,8.75,0,0,1,136,200a8,8,0,0,1-1.32-15.89c16.57-2.79,30.63-16.85,33.44-33.45a8,8,0,0,1,15.78,2.68Z"/></symbol><symbol id="i-pill" viewBox="0 0 256 256"><path d="M216.42,39.6a53.26,53.26,0,0,0-75.32,0L39.6,141.09a53.26,53.26,0,0,0,75.32,75.31h0L216.43,114.91A53.31,53.31,0,0,0,216.42,39.6ZM103.61,205.09h0a37.26,37.26,0,0,1-52.7-52.69L96,107.31,148.7,160ZM205.11,103.6,160,148.69,107.32,96l45.1-45.09a37.26,37.26,0,0,1,52.69,52.69ZM189.68,82.34a8,8,0,0,1,0,11.32l-24,24a8,8,0,1,1-11.31-11.32l24-24A8,8,0,0,1,189.68,82.34Z"/></symbol><symbol id="i-trophy" viewBox="0 0 256 256"><path d="M232,64H208V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8Zm144-8.9c0,35.52-29,64.64-64,64.9a64,64,0,0,1-64-64V56H192ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"/></symbol><symbol id="i-clock" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></symbol><symbol id="i-play" viewBox="0 0 256 256"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></symbol><symbol id="i-warning" viewBox="0 0 256 256"><path d="M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM222.93,203.8a8.5,8.5,0,0,1-7.48,4.2H40.55a8.5,8.5,0,0,1-7.48-4.2,7.59,7.59,0,0,1,0-7.72L120.52,44.21a8.75,8.75,0,0,1,15,0l87.45,151.87A7.59,7.59,0,0,1,222.93,203.8ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"/></symbol><symbol id="i-arrow-down" viewBox="0 0 256 256"><path d="M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72a8,8,0,0,1,11.32-11.32L120,196.69V40a8,8,0,0,1,16,0V196.69l58.34-58.35a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="i-flashlight" viewBox="0 0 256 256"><path d="M184,16H72A16,16,0,0,0,56,32V77.33a16.12,16.12,0,0,0,3.2,9.6L80,114.67V224a16,16,0,0,0,16,16h64a16,16,0,0,0,16-16V114.67l20.8-27.74a16.12,16.12,0,0,0,3.2-9.6V32A16,16,0,0,0,184,16ZM72,32H184V56H72V32Zm91.2,73.07a16.12,16.12,0,0,0-3.2,9.6V224H96V114.67a16.12,16.12,0,0,0-3.2-9.6L72,77.33V72H184v5.33ZM136,120v32a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Z"/></symbol><symbol id="i-play-circle" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48.24-94.78-64-40A8,8,0,0,0,100,88v80a8,8,0,0,0,12.24,6.78l64-40a8,8,0,0,0,0-13.56ZM116,153.57V102.43L156.91,128Z"/></symbol><symbol id="i-bookmark-simple" viewBox="0 0 256 256"><path d="M184,32H72A16,16,0,0,0,56,48V224a8,8,0,0,0,12.24,6.78L128,193.43l59.77,37.35A8,8,0,0,0,200,224V48A16,16,0,0,0,184,32Zm0,177.57-51.77-32.35a8,8,0,0,0-8.48,0L72,209.57V48H184Z"/></symbol><symbol id="i-fork-knife" viewBox="0 0 256 256"><path d="M72,88V40a8,8,0,0,1,16,0V88a8,8,0,0,1-16,0ZM216,40V224a8,8,0,0,1-16,0V176H152a8,8,0,0,1-8-8,268.75,268.75,0,0,1,7.22-56.88c9.78-40.49,28.32-67.63,53.63-78.47A8,8,0,0,1,216,40ZM200,53.9c-32.17,24.57-38.47,84.42-39.7,106.1H200ZM119.89,38.69a8,8,0,1,0-15.78,2.63L112,88.63a32,32,0,0,1-64,0l7.88-47.31a8,8,0,1,0-15.78-2.63l-8,48A8.17,8.17,0,0,0,32,88a48.07,48.07,0,0,0,40,47.32V224a8,8,0,0,0,16,0V135.32A48.07,48.07,0,0,0,128,88a8.17,8.17,0,0,0-.11-1.31Z"/></symbol><symbol id="i-calendar-x" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-50.34-74.34L139.31,152l18.35,18.34a8,8,0,0,1-11.32,11.32L128,163.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L116.69,152,98.34,133.66a8,8,0,0,1,11.32-11.32L128,140.69l18.34-18.35a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="i-hourglass-medium" viewBox="0 0 256 256"><path d="M200,75.64V40a16,16,0,0,0-16-16H72A16,16,0,0,0,56,40V76a16.07,16.07,0,0,0,6.4,12.8L114.67,128,62.4,167.2A16.07,16.07,0,0,0,56,180v36a16,16,0,0,0,16,16H184a16,16,0,0,0,16-16V180.36a16.09,16.09,0,0,0-6.35-12.77L141.27,128l52.38-39.6A16.05,16.05,0,0,0,200,75.64ZM72,40H184V75.64L178.23,80H77.33L72,76Zm56,78L98.67,96h58.4Zm56,98H72V180l48-36v24a8,8,0,0,0,16,0V144.08l48,36.28Z"/></symbol><symbol id="i-question" viewBox="0 0 256 256"><path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></symbol><symbol id="i-bowl-food" viewBox="0 0 256 256"><path d="M224,104h-8.37a88,88,0,0,0-175.26,0H32a8,8,0,0,0-8,8,104.35,104.35,0,0,0,56,92.28V208a16,16,0,0,0,16,16h64a16,16,0,0,0,16-16v-3.72A104.35,104.35,0,0,0,232,112,8,8,0,0,0,224,104Zm-24.46,0H148.12a71.84,71.84,0,0,1,41.27-29.57A71.45,71.45,0,0,1,199.54,104ZM173.48,56.23q2.75,2.25,5.27,4.75a87.92,87.92,0,0,0-49.15,43H100.1A72.26,72.26,0,0,1,168,56C169.83,56,171.66,56.09,173.48,56.23ZM128,40a71.87,71.87,0,0,1,19,2.57A88.36,88.36,0,0,0,83.33,104H56.46A72.08,72.08,0,0,1,128,40Zm36.66,152A8,8,0,0,0,160,199.3V208H96v-8.7A8,8,0,0,0,91.34,192a88.29,88.29,0,0,1-51-72H215.63A88.29,88.29,0,0,1,164.66,192Z"/></symbol><symbol id="i-device-mobile" viewBox="0 0 256 256"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM72,64H184V192H72Zm8-32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z"/></symbol><symbol id="i-scales" viewBox="0 0 256 256"><path d="M239.43,133l-32-80h0a8,8,0,0,0-9.16-4.84L136,62V40a8,8,0,0,0-16,0V65.58L54.26,80.19A8,8,0,0,0,48.57,85h0v.06L16.57,165a7.92,7.92,0,0,0-.57,3c0,23.31,24.54,32,40,32s40-8.69,40-32a7.92,7.92,0,0,0-.57-3L66.92,93.77,120,82V208H104a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16H136V78.42L187,67.1,160.57,133a7.92,7.92,0,0,0-.57,3c0,23.31,24.54,32,40,32s40-8.69,40-32A7.92,7.92,0,0,0,239.43,133ZM56,184c-7.53,0-22.76-3.61-23.93-14.64L56,109.54l23.93,59.82C78.76,180.39,63.53,184,56,184Zm144-32c-7.53,0-22.76-3.61-23.93-14.64L200,77.54l23.93,59.82C222.76,148.39,207.53,152,200,152Z"/></symbol><symbol id="i-x-circle" viewBox="0 0 256 256"><path d="M165.66,101.66,139.31,128l26.35,26.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></symbol><symbol id="i-speaker-simple-high" viewBox="0 0 256 256"><path d="M163.51,24.81a8,8,0,0,0-8.42.88L85.25,80H40A16,16,0,0,0,24,96v64a16,16,0,0,0,16,16H85.25l69.84,54.31A8,8,0,0,0,168,224V32A8,8,0,0,0,163.51,24.81ZM152,207.64,92.91,161.69A7.94,7.94,0,0,0,88,160H40V96H88a7.94,7.94,0,0,0,4.91-1.69L152,48.36ZM208,104v48a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v80a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></symbol><symbol id="i-speaker-simple-slash" viewBox="0 0 256 256"><path d="M192,152V104a8,8,0,0,1,16,0v48a8,8,0,0,1-16,0Zm40-72a8,8,0,0,0-8,8v80a8,8,0,0,0,16,0V88A8,8,0,0,0,232,80ZM221.92,210.62a8,8,0,1,1-11.84,10.76L168,175.09V224a8,8,0,0,1-12.91,6.31L85.25,176H40a16,16,0,0,1-16-16V96A16,16,0,0,1,40,80H81.55L50.08,45.38A8,8,0,0,1,61.92,34.62ZM152,157.49,96.1,96H40v64H88a7.94,7.94,0,0,1,4.91,1.69L152,207.64ZM125.06,69.31l26.94-21v58.47a8,8,0,0,0,16,0V32a8,8,0,0,0-12.91-6.31l-39.85,31a8,8,0,0,0,9.82,12.63Z"/></symbol><symbol id="i-hand-tap" viewBox="0 0 256 256"><path d="M56,76a60,60,0,0,1,120,0,8,8,0,0,1-16,0,44,44,0,0,0-88,0,8,8,0,1,1-16,0Zm140,44a27.9,27.9,0,0,0-13.36,3.39A28,28,0,0,0,144,106.7V76a28,28,0,0,0-56,0v80l-3.82-6.13a28,28,0,0,0-48.41,28.17l29.32,50A8,8,0,1,0,78.89,220L49.6,170a12,12,0,1,1,20.78-12l.14.23,18.68,30A8,8,0,0,0,104,184V76a12,12,0,0,1,24,0v68a8,8,0,1,0,16,0V132a12,12,0,0,1,24,0v20a8,8,0,0,0,16,0v-4a12,12,0,0,1,24,0v36c0,21.61-7.1,36.3-7.16,36.42a8,8,0,0,0,3.58,10.73A7.9,7.9,0,0,0,208,232a8,8,0,0,0,7.16-4.42c.37-.73,8.85-18,8.85-43.58V148A28,28,0,0,0,196,120Z"/></symbol><symbol id="i-calendar-blank" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"/></symbol><symbol id="f-heart" viewBox="0 0 256 256"><path d="M240,102c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,228.66,16,172,16,102A62.07,62.07,0,0,1,78,40c20.65,0,38.73,8.88,50,23.89C139.27,48.88,157.35,40,178,40A62.07,62.07,0,0,1,240,102Z"/></symbol><symbol id="f-check-circle" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="f-sparkle" viewBox="0 0 256 256"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></symbol><symbol id="f-play" viewBox="0 0 256 256"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></symbol><symbol id="f-pause" viewBox="0 0 256 256"><path d="M216,48V208a16,16,0,0,1-16,16H160a16,16,0,0,1-16-16V48a16,16,0,0,1,16-16h40A16,16,0,0,1,216,48ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Z"/></symbol><symbol id="f-lock-simple" viewBox="0 0 256 256"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96Z"/></symbol><symbol id="f-cell-signal-full" viewBox="0 0 256 256"><path d="M208,40V200a16,16,0,0,1-16,16H32A16,16,0,0,1,20.7,188.68l160-160A16,16,0,0,1,208,40Z"/></symbol><symbol id="f-wifi-high" viewBox="0 0 256 256"><path d="M244.35,92.8l-104,125.43A15.93,15.93,0,0,1,128,224h0a15.93,15.93,0,0,1-12.31-5.77L11.65,92.8A15.65,15.65,0,0,1,8.11,80.91,15.93,15.93,0,0,1,14.28,70.1,186.67,186.67,0,0,1,128,32,186.67,186.67,0,0,1,241.72,70.1a15.93,15.93,0,0,1,6.17,10.81A15.65,15.65,0,0,1,244.35,92.8Z"/></symbol><symbol id="f-battery-full" viewBox="0 0 256 256"><path d="M200,56H32A24,24,0,0,0,8,80v96a24,24,0,0,0,24,24H200a24,24,0,0,0,24-24V80A24,24,0,0,0,200,56Zm8,120a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H200a8,8,0,0,1,8,8ZM192,96v64a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V96a8,8,0,0,1,8-8H184A8,8,0,0,1,192,96Zm64,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Z"/></symbol><symbol id="f-microphone" viewBox="0 0 256 256"><path d="M80,128V64a48,48,0,0,1,96,0v64a48,48,0,0,1-96,0Zm128,0a8,8,0,0,0-16,0,64,64,0,0,1-128,0,8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V240a8,8,0,0,0,16,0V207.6A80.11,80.11,0,0,0,208,128Z"/></symbol><symbol id="f-video-camera" viewBox="0 0 256 256"><path d="M192,72V184a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V72A16,16,0,0,1,32,56H176A16,16,0,0,1,192,72Zm58,.25a8.23,8.23,0,0,0-6.63,1.22L209.78,95.86A4,4,0,0,0,208,99.19v57.62a4,4,0,0,0,1.78,3.33l33.78,22.52a8,8,0,0,0,8.58.19,8.33,8.33,0,0,0,3.86-7.17V80A8,8,0,0,0,250,72.25Z"/></symbol><symbol id="f-arrow-down" viewBox="0 0 256 256"><path d="M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72A8,8,0,0,1,56,136h64V40a8,8,0,0,1,16,0v96h64a8,8,0,0,1,5.66,13.66Z"/></symbol></svg>
 
-<a class="pular" href="#pesquisa">Ir para a pesquisa</a>
+<a class="pular" href="#titulo">Ir para o conteúdo</a>
 
 <!-- Faixa fixa: contagem até a live (sem horário definido, conta os dias) -->
 <div class="faixa" id="faixa">
@@ -831,17 +798,18 @@
 
 <main>
 
-<!-- ===== DOBRA 1 — Topo e pesquisa ===== -->
+<!-- ===== DOBRA 1 — Topo: para que serve a página (14/10/2026: a pesquisa saiu da página, a pedido do Giovani) ===== -->
 <section class="hero" aria-labelledby="titulo">
   <div class="wrap hero__grade">
     <div class="hero__texto">
-      <h1 id="titulo" class="entra" style="--d:0">Atenção, você que vai participar da live de lançamento da Asfit</h1>
-      <p class="sub entra" style="--d:1">Veja tudo que vai rolar na live e mexa no app novo antes de todo mundo.</p>
-      <div class="acoes entra" id="pesquisa" style="--d:2">
-        <!-- Pesquisa do Grupo de Espera (com o presente): link no fim deste arquivo (CONFIG_AQUECIMENTO) -->
-        <a class="botao js-pesquisa" href="#" target="_blank" rel="noopener">Responder e pegar meu presente</a>
-        <p class="acoes__dica">O presente é o meu Kit de Receitas: sucos, chás e doces sem sair da dieta.</p>
-      </div>
+      <p class="hero__oi entra" style="--d:0">Oi, mô, tudo bem?</p>
+      <h1 id="titulo" class="entra" style="--d:0">Nessa página, eu vou te dar uma prévia do lançamento da Asfit.</h1>
+      <p class="sub entra" style="--d:1">Aqui você vai poder:</p>
+      <ul class="hero__lista entra" style="--d:2">
+        <li><a href="#app">mexer no app novo por dentro, antes de todo&nbsp;mundo<svg aria-hidden="true"><use href="#f-arrow-down"/></svg></a></li>
+        <li><a href="#live">saber tudo que vai rolar na live do dia&nbsp;11/11<svg aria-hidden="true"><use href="#f-arrow-down"/></svg></a></li>
+        <li><a href="#bonus">conhecer os bônus de quem se inscrever mais&nbsp;rápido<svg aria-hidden="true"><use href="#f-arrow-down"/></svg></a></li>
+      </ul>
     </div>
     <div class="hero__foto entra" style="--d:0">
       <img src="img/agatha-por-do-sol.webp" srcset="img/agatha-por-do-sol-640.webp 640w, img/agatha-por-do-sol.webp 853w" sizes="(min-width: 900px) 420px, 200px" alt="Agatha Sá no pôr do sol, com a logo da Asfit no céu" width="853" height="1066" fetchpriority="high">
@@ -891,7 +859,7 @@
         <button class="parte" role="tab" type="button" data-parte="treino" aria-selected="true" aria-controls="celular">
           <span class="parte__nome">Treino</span>
           <span class="parte__titulo">Você nunca mais chega perdida na academia.</span>
-          <span class="parte__texto">O seu treino já vem montado, com vídeo meu em cada exercício e a carga que você usou da última vez.</span>
+          <span class="parte__texto">O seu treino já vem montado, com a carga que você usou da última vez.</span>
           <i class="parte__barra" aria-hidden="true"><b></b></i>
         </button>
         <button class="parte" role="tab" type="button" data-parte="dieta" aria-selected="false" aria-controls="celular">
@@ -1092,21 +1060,14 @@
         </div>
         <!-- a dica também para a demonstração automática (controle de pausa pra quem precisa) -->
         <button class="tour__dica" type="button" data-dica-tour aria-label="Parar a demonstração e testar você mesma"><svg aria-hidden="true"><use href="#i-hand-tap"/></svg>Toque na tela pra testar</button>
-        <div class="tour__legenda" aria-live="polite" data-legenda><h3>Você nunca mais chega perdida na academia.</h3><p>O seu treino já vem montado, com vídeo meu em cada exercício e a carga que você usou da última vez.</p></div>
+        <div class="tour__legenda" aria-live="polite" data-legenda><h3>Você nunca mais chega perdida na academia.</h3><p>O seu treino já vem montado, com a carga que você usou da última vez.</p></div>
       </div>
-    </div>
-
-    <div class="acoes revela">
-      <p class="acoes__chamada">Toque no botão abaixo, responda a pesquisa e pegue o seu presente</p>
-      <svg class="acoes__seta" aria-hidden="true"><use href="#f-arrow-down"/></svg>
-      <a class="botao botao--amarelo js-pesquisa" href="#" target="_blank" rel="noopener">Responder e pegar meu presente</a>
-      <p class="acoes__dica">O presente é o meu Kit de Receitas: sucos, chás e doces sem sair da dieta.</p>
     </div>
   </div>
 </section>
 
 <!-- ===== DOBRA 3 — O que vai acontecer na live ===== -->
-<section class="live" aria-labelledby="titulo-live">
+<section class="live" id="live" aria-labelledby="titulo-live">
   <div class="wrap live__grade">
     <header class="live__cabeca revela">
       <h2 id="titulo-live">O que vai acontecer na live oficial de lançamento</h2>
@@ -1122,18 +1083,10 @@
       <p class="alerta revela" style="margin-top:34px"><svg aria-hidden="true"><use href="#i-warning"/></svg>As inscrições abrem durante a live, então quem estiver lá chega na frente.</p>
     </div>
   </div>
-  <div class="wrap">
-    <div class="acoes revela">
-      <p class="acoes__chamada">Toque no botão abaixo, responda a pesquisa e pegue o seu presente</p>
-      <svg class="acoes__seta" aria-hidden="true"><use href="#f-arrow-down"/></svg>
-      <a class="botao js-pesquisa" href="#" target="_blank" rel="noopener">Responder e pegar meu presente</a>
-      <p class="acoes__dica">O presente é o meu Kit de Receitas: sucos, chás e doces sem sair da dieta.</p>
-    </div>
-  </div>
 </section>
 
 <!-- ===== DOBRA 4 — Bônus (os mesmos cards da captação) ===== -->
-<section class="bonus-sec" aria-labelledby="titulo-bonus">
+<section class="bonus-sec" id="bonus" aria-labelledby="titulo-bonus">
   <div class="wrap bonus-sec__caixa">
     <h2 id="titulo-bonus" class="revela">Bônus que você pode ganhar ao se inscrever no lançamento da&nbsp;Asfit</h2>
     <ul class="bonus">
@@ -1167,12 +1120,6 @@
     </ul>
     <p class="revela">Isso sem falar no <strong>preço promocional de lançamento</strong> e no <strong>tempo de acesso aumentado</strong>, uma condição que talvez eu nunca mais ofereça de novo.</p>
     <p class="alerta revela"><svg aria-hidden="true"><use href="#i-warning"/></svg>Esses bônus são para as primeiras inscritas no dia da abertura.</p>
-    <div class="acoes revela">
-      <p class="acoes__chamada">Toque no botão abaixo, responda a pesquisa e pegue o seu presente</p>
-      <svg class="acoes__seta" aria-hidden="true"><use href="#f-arrow-down"/></svg>
-      <a class="botao js-pesquisa" href="#" target="_blank" rel="noopener">Responder e pegar meu presente</a>
-      <p class="acoes__dica">O presente é o meu Kit de Receitas: sucos, chás e doces sem sair da dieta.</p>
-    </div>
   </div>
 </section>
 
@@ -1188,12 +1135,6 @@
       <cite>Agatha Sá</cite>
     </blockquote>
     <h2 id="titulo-legiao" class="revela">Te vejo dia 11/11, na live oficial de lançamento.</h2>
-    <div class="acoes revela">
-      <p class="acoes__chamada">Toque no botão abaixo, responda a pesquisa e pegue o seu presente</p>
-      <svg class="acoes__seta" aria-hidden="true"><use href="#f-arrow-down"/></svg>
-      <a class="botao botao--amarelo js-pesquisa" href="#" target="_blank" rel="noopener">Responder e pegar meu presente</a>
-      <p class="acoes__dica">O presente é o meu Kit de Receitas: sucos, chás e doces sem sair da dieta.</p>
-    </div>
     <p class="assinatura revela">Bora dá-lhe pra não tomá-lhe!</p>
   </div>
 </section>
@@ -1205,31 +1146,16 @@
   <p><span>@agathasa</span><span>@asfitcomunidade</span></p>
 </footer>
 
-<!-- ===== Pop-up de saída (mesmo comportamento da aquecimento da BF26) ===== -->
-<div class="popup" id="popup" hidden>
-  <div class="popup__fundo" data-fechar-popup></div>
-  <div class="popup__caixa" role="dialog" aria-modal="true" aria-labelledby="popup-titulo">
-    <button class="popup__fechar" type="button" data-fechar-popup aria-label="Fechar"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
-    <img src="img/logo-terracota-336.webp" alt="Asfit" width="336" height="70" loading="lazy">
-    <h2 id="popup-titulo">Espera! Antes de sair, pegue o seu presente</h2>
-    <p class="popup__data">Responda a pesquisa e ganhe o meu Kit de Receitas: sucos, chás e doces sem sair da dieta.</p>
-    <div class="acoes">
-      <a class="botao js-pesquisa" href="#" target="_blank" rel="noopener">Responder e pegar meu presente</a>
-    </div>
-  </div>
-</div>
-
 <script>
   // ===== CONFIGURAR ANTES DE MANDAR O LINK PRO GRUPO =====
   window.CONFIG_AQUECIMENTO = {
     INICIO_DA_LIVE: '',   // dia e hora da live, no horário de Brasília. Ex.: '2026-11-11T20:00:00-03:00'. Vazio = a faixa conta só os dias até 11/11.
     PLATAFORMA: 'no YouTube', // como entra na frase: 'no YouTube', 'no Instagram'. Vazio = só "ao vivo".
-    LINK_DA_PESQUISA: 'pesquisa/', // a pesquisa do Grupo de Espera (página /pesquisa/ deste site), que entrega o Kit de Receitas. Antes era o Google Forms.
     LINK_DA_LIVE: ''      // endereço da live: quando ela começa, a faixa do topo vira link.
   };
 </script>
 <script src="js/gsap.min.js?v=bf3fd8ec" defer fetchpriority="low"></script>
 <script src="js/ScrollTrigger.min.js?v=5445d0e9" defer fetchpriority="low"></script>
-<script src="js/pagina.js?v=eaaa106e" defer fetchpriority="low"></script>
+<script src="js/pagina.js?v=fbf37e36" defer fetchpriority="low"></script>
 </body>
 </html>

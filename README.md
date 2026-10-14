@@ -1,8 +1,9 @@
 # Página da live — lançamento da Asfit
 
 Página da live oficial de lançamento da Asfit (Agatha Sá), dia 11/11. Quem entra no Grupo de Espera chega aqui pelo
-link das mensagens: vê o que vai rolar na live, mexe numa prévia do app e responde a pesquisa do Grupo de Espera (a
-página `/pesquisa/`, ver abaixo), que dá o Kit de Receitas de presente. Nas mensagens ela aparece como "a página onde eu explico tudo sobre o lançamento".
+link das mensagens, e quem vê os carrosséis de aquecimento, pelo tráfego. A primeira dobra diz para que serve a página:
+é uma prévia do lançamento, em que a pessoa mexe no app, vê o que vai rolar na live e conhece os bônus. Desde 14/10/2026
+a página não tem botão (a pesquisa do Grupo de Espera e o pop-up de saída saíram). Nas mensagens ela aparece como "a página onde eu explico tudo sobre o lançamento".
 
 No ar: https://asfit-live.netlify.app (Netlify, site id `0073bc3b-9719-45ac-82d5-94a0cea11bb7`, deploy manual:
 `npx -y netlify-cli deploy --prod --dir . --site 0073bc3b-9719-45ac-82d5-94a0cea11bb7`).
@@ -10,14 +11,12 @@ Versão anterior de referência: https://live-asfit.pages.dev (Cloudflare Pages)
 
 - `index.html` — a página, com o CSS. A configuração fica no fim (`CONFIG_AQUECIMENTO`).
 - `js/pagina.js` — o que se mexe: a faixa com a contagem, a prévia do app (treino, dieta, creatina, legião e desafios)
-  com o dedinho de demonstração, os vídeos dos bônus e o pop-up de saída. Cada parte roda separada: se uma der erro,
+  com o dedinho de demonstração, e os vídeos dos bônus. Cada parte roda separada: se uma der erro,
   as outras seguem.
 - `js/gsap.min.js` e `js/ScrollTrigger.min.js` — GSAP 3.15, cópia local (a sequência "A Asfit é pra você que…").
 - `js/legiao.js` — Three.js 0.186 só com o que a cena dos pontinhos usa, montado com esbuild a partir de
   `fonte/legiao-fonte.js`. Só baixa quando a pessoa chega perto da última dobra.
 - `img/`, `video/` e `fonts/` (Figtree, licença OFL). Os vídeos só baixam quando aparecem na tela.
-- `pesquisa/index.html` e `js/pesquisa.js` — a pesquisa do Grupo de Espera (formulário em etapas que substituiu o Google
-  Forms). Ver a seção "A pesquisa" abaixo.
 - `_headers` — `noindex` e cache das imagens, dos vídeos, dos scripts e da fonte. A Netlify lê esse mesmo formato.
 - `fonte/` — só manutenção (`versionar.py` e a fonte da cena 3D). Pode ir publicada junto, não pesa nada.
 
@@ -33,15 +32,12 @@ Versão anterior de referência: https://live-asfit.pages.dev (Cloudflare Pages)
 - `INICIO_DA_LIVE` — dia e hora da live, no horário de Brasília (ex.: `'2026-11-11T20:00:00-03:00'`). Vazio, a faixa do
   topo conta só os dias; preenchido, vira contagem com segundos.
 - `PLATAFORMA` — `'no YouTube'`.
-- `LINK_DA_PESQUISA` — a pesquisa do Grupo de Espera: `'pesquisa/'` (a página deste site). Todos os botões da página e o do
-  pop-up abrem ela na mesma aba, levando junto as `utm_*` da visita. Se um dia apontar pra outro site, os botões voltam
-  a abrir aba nova.
 - `LINK_DA_LIVE` — quando a live começa, a faixa do topo vira link para ela.
 
 ## Se mexer em algum arquivo de `js/`
 
 Rodar `python3 fonte/versionar.py` antes de publicar. Ele carimba `?v=` com o hash de cada script no `index.html` (e o
-import da cena 3D no `pagina.js`) e do `js/pesquisa.js` no `pesquisa/index.html`. Sem isso, quem já abriu a página fica com o js antigo no cache por 1 dia, com o HTML
+import da cena 3D no `pagina.js`). Sem isso, quem já abriu a página fica com o js antigo no cache por 1 dia, com o HTML
 novo, e a prévia do app trava.
 
 ## Domínio
@@ -54,11 +50,10 @@ aparecer no Google, tirar dos dois lugares.
 
 - A primeira tela carrega só HTML, CSS, fonte e foto. O resto (Three.js, vídeos, telas do app) baixa quando chega perto.
 - Com "reduzir movimento" ligado no aparelho, tudo aparece direto, sem animação.
-- O pop-up de saída aparece uma vez por visita, a partir de 4 s (no computador quando o mouse sobe para fechar a aba;
-  no celular no primeiro "voltar" e quando a pessoa volta de outro app), e não aparece mais depois que ela toca no
-  botão da pesquisa.
 
 ## A pesquisa (`/pesquisa/`)
+
+Desde 14/10/2026 a página da live não tem mais botão pra pesquisa: ela vive sozinha em https://asfit-live.netlify.app/pesquisa/ e é divulgada pelo link direto. O `js/pesquisa.js` também é versionado pelo `fonte/versionar.py`.
 
 Formulário em etapas, mobile primeiro, sem biblioteca. Quem responde até o fim ganha o Kit de Receitas (3 PDFs). Tudo no
 `js/pesquisa.js`; o visual está no `<style>` do `pesquisa/index.html`.
