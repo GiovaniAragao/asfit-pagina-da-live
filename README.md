@@ -1,14 +1,15 @@
 # Página da live — lançamento da Asfit
 
 Página da live oficial de lançamento da Asfit (Agatha Sá), dia 11/11. Quem entra no Grupo de Espera chega aqui pelo
-link das mensagens: vê o que vai rolar na live, mexe numa prévia do app e responde a pesquisa do Grupo de Espera, que dá
-o Kit de Receitas de presente. Nas mensagens ela aparece como "a página onde eu explico tudo sobre o lançamento".
+link das mensagens, e quem vê os carrosséis de aquecimento, pelo tráfego. A primeira dobra diz para que serve a página:
+é uma prévia do lançamento, em que a pessoa mexe no app, vê o que vai rolar na live e conhece os bônus. Desde 14/10/2026
+a página não tem botão (a pesquisa do Grupo de Espera e o pop-up de saída saíram). Nas mensagens ela aparece como "a página onde eu explico tudo sobre o lançamento".
 
 Versão de referência no ar: https://live-asfit.pages.dev (Cloudflare Pages, provisória).
 
 - `index.html` — a página, com o CSS. A configuração fica no fim (`CONFIG_AQUECIMENTO`).
 - `js/pagina.js` — o que se mexe: a faixa com a contagem, a prévia do app (treino, dieta, creatina, legião e desafios)
-  com o dedinho de demonstração, os vídeos dos bônus e o pop-up de saída. Cada parte roda separada: se uma der erro,
+  com o dedinho de demonstração, e os vídeos dos bônus. Cada parte roda separada: se uma der erro,
   as outras seguem.
 - `js/gsap.min.js` e `js/ScrollTrigger.min.js` — GSAP 3.15, cópia local (a sequência "A Asfit é pra você que…").
 - `js/legiao.js` — Three.js 0.186 só com o que a cena dos pontinhos usa, montado com esbuild a partir de
@@ -29,7 +30,6 @@ Versão de referência no ar: https://live-asfit.pages.dev (Cloudflare Pages, pr
 - `INICIO_DA_LIVE` — dia e hora da live, no horário de Brasília (ex.: `'2026-11-11T20:00:00-03:00'`). Vazio, a faixa do
   topo conta só os dias; preenchido, vira contagem com segundos.
 - `PLATAFORMA` — `'no YouTube'`.
-- `LINK_DA_PESQUISA` — o check-in do Grupo de Espera (já preenchido). Todos os botões da página e o do pop-up abrem ele.
 - `LINK_DA_LIVE` — quando a live começa, a faixa do topo vira link para ela.
 
 ## Se mexer em algum arquivo de `js/`
@@ -48,6 +48,3 @@ aparecer no Google, tirar dos dois lugares.
 
 - A primeira tela carrega só HTML, CSS, fonte e foto. O resto (Three.js, vídeos, telas do app) baixa quando chega perto.
 - Com "reduzir movimento" ligado no aparelho, tudo aparece direto, sem animação.
-- O pop-up de saída aparece uma vez por visita, a partir de 4 s (no computador quando o mouse sobe para fechar a aba;
-  no celular no primeiro "voltar" e quando a pessoa volta de outro app), e não aparece mais depois que ela toca no
-  botão da pesquisa.

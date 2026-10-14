@@ -7,7 +7,6 @@
   var CONFIG = window.CONFIG_AQUECIMENTO || {};
   var INICIO_DA_LIVE = CONFIG.INICIO_DA_LIVE || '';
   var PLATAFORMA = CONFIG.PLATAFORMA || '';
-  var LINK_DA_PESQUISA = CONFIG.LINK_DA_PESQUISA || '';
   var LINK_DA_LIVE = CONFIG.LINK_DA_LIVE || '';
 
   var doc = document;
@@ -18,15 +17,7 @@
   var reduzir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function $(s, r) { return (r || doc).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || doc).querySelectorAll(s)); }
-  var guarda = {
-    ler: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    gravar: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-  };
-  function sessao(k, v) {
-    try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) {}
-    return null;
-  }
-  // cada parte roda protegida: se uma der erro, as outras seguem (pesquisa, animações, prévia)
+  // cada parte roda protegida: se uma der erro, as outras seguem (faixa, animações, prévia)
   function seguro(nome, fn) { try { fn(); } catch (e) { if (window.console) console.error('[aquecimento] ' + nome, e); } }
   function dois(n) { return (n < 10 ? '0' : '') + n; }
   function mmss(s) { return dois(Math.floor(s / 60)) + ':' + dois(s % 60); }
@@ -43,7 +34,7 @@
     $$('[data-hoje-trava]').forEach(function (el) { el.textContent = data({ weekday: 'long', day: 'numeric', month: 'long' }); });
   });
 
-  // ===== Quando: dia, hora e plataforma na linha da live e no pop-up =====
+  // ===== Quando: dia, hora e plataforma na linha da live =====
   seguro('quando', function () {
     var hora = '';
     if (inicio) {
@@ -52,7 +43,6 @@
     }
     var aoVivo = 'ao vivo' + (PLATAFORMA ? ' ' + PLATAFORMA : '');
     $$('[data-quando]').forEach(function (el) { el.textContent = 'Dia 11 de novembro' + (hora ? ', às ' + hora : '') + ' · ' + aoVivo; });
-    $$('[data-quando-popup]').forEach(function (el) { el.textContent = '11 de novembro' + (hora ? ', às ' + hora : '') + ', ' + aoVivo; });
   });
 
   // ===== Faixa do topo: sem horário conta os dias; com horário, dias, horas, minutos e segundos =====
@@ -94,20 +84,6 @@
     if (atualizar()) {
       var t = setInterval(function () { if (!atualizar()) clearInterval(t); }, 1000);
     }
-  });
-
-  // ===== Pesquisa do Grupo de Espera (dá o Kit de Receitas). O lembrete saiu em 12/10/2026 =====
-  var fecharPopup = function () {};
-  seguro('pesquisa', function () {
-    var pesquisas = $$('.js-pesquisa');
-    pesquisas.forEach(function (a) { if (LINK_DA_PESQUISA) a.href = LINK_DA_PESQUISA; });
-    pesquisas.forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        if (!LINK_DA_PESQUISA) e.preventDefault();
-        guarda.gravar('asfit-pesquisa', '1');
-        fecharPopup();
-      });
-    });
   });
 
   // ===== Blocos surgindo ao rolar (mesmo código do site da mãe do Giovani) =====
@@ -153,40 +129,6 @@
       el.classList.remove('balanca'); void el.offsetWidth; el.classList.add('balanca');
       clearTimeout(t); t = setTimeout(function () { el.classList.remove('balanca'); }, 1800);
     });
-  });
-
-  // ===== Pop-up de saída: uma vez por visita, a partir de 4 s =====
-  seguro('pop-up', function () {
-    var el = $('#popup');
-    if (!el) return;
-    var aberto = false, mostrou = sessao('asfit-popup') === '1', desde = Date.now(), foco = null;
-    function pode() { return !mostrou && !aberto && Date.now() - desde > 4000 && guarda.ler('asfit-pesquisa') !== '1'; }
-    function esc(e) { if (e.key === 'Escape') fecharPopup(); }
-    function abrir() {
-      if (!pode()) return false;
-      aberto = true; mostrou = true; sessao('asfit-popup', '1');
-      foco = doc.activeElement;
-      el.hidden = false; el.classList.add('abrindo');
-      $('.popup__fechar', el).focus();
-      doc.addEventListener('keydown', esc);
-      return true;
-    }
-    fecharPopup = function () {
-      if (!aberto) return;
-      aberto = false; el.hidden = true; el.classList.remove('abrindo');
-      doc.removeEventListener('keydown', esc);
-      if (foco && foco.focus) foco.focus();
-    };
-    $$('[data-fechar-popup]', el).forEach(function (b) { b.addEventListener('click', fecharPopup); });
-    // computador: o mouse sobe para fechar a aba
-    doc.addEventListener('mouseout', function (e) { if (!e.relatedTarget && e.clientY <= 0) abrir(); });
-    // celular: o primeiro "voltar" mostra o pop-up; o segundo sai da página
-    if (window.matchMedia('(pointer: coarse)').matches && history.pushState) {
-      history.pushState({ asfit: 1 }, '');
-      window.addEventListener('popstate', function () { if (!abrir()) history.back(); });
-    }
-    // voltou de outra aba ou de outro app
-    doc.addEventListener('visibilitychange', function () { if (doc.visibilityState === 'visible') abrir(); });
   });
 
   // ===== A prévia do app =====
